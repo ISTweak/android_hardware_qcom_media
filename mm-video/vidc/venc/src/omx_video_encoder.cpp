@@ -159,10 +159,6 @@ OMX_ERRORTYPE omx_venc::component_init(OMX_STRING role)
     return OMX_ErrorInsufficientResources;
   }
 
-  //Getting current performance level
-  m_curr_perf = 0;
-  dev_get_curr_perf_lvl(&m_curr_perf);
-
   //Intialise the OMX layer variables
   memset(&m_pCallbacks,0,sizeof(OMX_CALLBACKTYPE));
 
@@ -459,6 +455,7 @@ OMX_ERRORTYPE omx_venc::component_init(OMX_STRING role)
       }
     }
   }
+
   DEBUG_PRINT_HIGH("\n Component_init return value = 0x%x", eRet);
   return eRet;
 }
@@ -1628,11 +1625,6 @@ bool omx_venc::dev_get_buf_req(OMX_U32 *min_buff_count,
                                   buff_size,
                                   port);
 
-}
-
-bool omx_venc::dev_get_curr_perf_lvl(OMX_PTR curr_perf)
-{
-  return handle->venc_get_curr_perf_lvl(curr_perf);
 }
 
 bool omx_venc::dev_set_buf_req(OMX_U32 *min_buff_count,
